@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 const mongoose = require('mongoose');
 const mongone = require('./mongone.js');
 
@@ -17,12 +19,16 @@ mongoose.connect(DATABASE_URL).then(
 
 function save(user) {
   let userModel = new User({
-    username: user.name,
+    username: user.username,
     email: user.email,
     password: user.password
   });
   return new Promise((resolve, reject) => {
-    userMode.save((err, savedUser) => {
+    userModel.save((err, savedUser) => {
+      if (err) {
+        console.error(err);
+      }
+      console.log('saved user in lib', savedUser);
       resolve(savedUser);
     });
   });

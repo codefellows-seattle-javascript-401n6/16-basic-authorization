@@ -12,14 +12,16 @@ const User = new mongoose.Schema({
 User.pre('save', function(next) {
   if (this.isNew) {
     bcrypt.hash(this.password, 10, (err, hash) => {
+      if (err) return next(err);
       this.password = hash;
-      this.psswordHash = hash;
-      next();
+      this.passwordHash = hash;
+      console.log('this', this);
+      return next(this);
     });
   } else {
-    console.info('Old user', this);
+    console.log('model pre else this', this);
+    next(this);
   }
-  next();
 });
 
 User.checkPassword = function(attempt) {
