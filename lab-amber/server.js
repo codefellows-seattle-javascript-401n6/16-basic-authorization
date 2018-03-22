@@ -15,6 +15,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/', loginAPI);
+app.get('*', function(req, res){
+  res.send('Not Found', 404);
+});
 
 app.listen(PORT, ()=> {
   console.info(`Listening in at http://localhost:${PORT}.`);
