@@ -34,6 +34,15 @@ function save(user) {
   });
 }
 
+function get(username){
+  return new Promise((resolve, reject) => {
+    User.findOne({username: username}, (err, user) => {
+      resolve(user);
+    });
+  });
+}
+
 module.exports = {
-  save
+  save,
+  get
 };
