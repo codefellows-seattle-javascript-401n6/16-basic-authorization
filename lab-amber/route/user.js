@@ -10,7 +10,6 @@ const router = express.Router();
 
 router.post('/api/signup', (req, res) => {
   let authHeader = req.get('Authorization');
-  console.log('auth header', authHeader);
   if (!authHeader) {
     res.status(400);
     res.send('Must provide username/password');
@@ -25,8 +24,10 @@ router.post('/api/signup', (req, res) => {
     password: req.body.password
   };
   storage.save(newUser).then(user => {
-    console.log('user saved', user);
-    res.send(user);
+    res.send({
+      username: user.username,
+      email: user.email
+    });
   }).catch(err => {
     console.error(err);
   });
@@ -34,6 +35,9 @@ router.post('/api/signup', (req, res) => {
 
 router.get('/api/signin', (req, res) => {
   let authHeader = req.get('Authorization');
+  if (!authHeader) {
+    res.status()
+  }
   let payload = authHeader.split('Basic ')[1];
   let decoded = Buffer.from(payload, 'base64').toString();
   let [username, password] = decoded.split(':');

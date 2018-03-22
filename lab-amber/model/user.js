@@ -15,12 +15,10 @@ User.pre('save', function(next) {
       if (err) return next(err);
       this.password = hash;
       this.passwordHash = hash;
-      console.log('this', this);
-      return next(this);
+      next();
     });
   } else {
-    console.log('model pre else this', this);
-    next(this);
+    next();
   }
 });
 
