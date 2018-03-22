@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const User = new mongoose.Schema({
-  username: String,
-  email: String,
+  username: {type: String},
+  email: {type: String},
   password: String
 });
 
@@ -18,19 +18,9 @@ User.pre('save', function(next) {
       next();
     });
   } else {
+    console.log('is not new');
     next();
   }
 });
-
-User.checkPassword = function(attempt) {
-  return new Promise((resolve, reject) => {
-    bcrypt.compare(attempt, this.password, (err, valid) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(valid);
-    });
-  });
-};
 
 module.exports = mongoose.model('User', User);

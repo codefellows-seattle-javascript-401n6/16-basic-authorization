@@ -28,7 +28,6 @@ function save(user) {
       if (err) {
         console.error(err);
       }
-      console.log('saved user in lib', savedUser);
       resolve(savedUser);
     });
   });

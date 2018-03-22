@@ -16,6 +16,11 @@ router.post('/api/signup', (req, res) => {
     res.send('Must provide username/password');
     return;
   }
+  if (req.body.username === undefined || req.body.email === undefined || req.body.password === undefined) {
+    res.status(400);
+    res.send('Must provide valid JSON in body');
+    return;
+  }
   let payload = authHeader.split('Basic ')[1];
   let decoded = Buffer.from(payload, 'base64').toString();
   let [username, password] = decoded.split(':');
