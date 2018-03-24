@@ -21,18 +21,12 @@ const User = new mongoose.Schema({
     }
 });
 
-User.methods.comparePassword = function(password) {
-    bcrypt.compare(password, this.password, function(err, res) {
-        if(err){
-            res.sendStatus(401)
-        } else{
-            res.sendStatus(200);
-        }
-    })
-}
+User.methods.comparePass = function(password) {
+   return bcrypt.compare(password, this.password);
+};
 
 User.pre('save', function(next) {
-    if (this.isNew) {
+    if(this.isNew) {
       console.log('New user', this);
       bcrypt.hash(this.password, 5)
       .then(hash => {
@@ -43,6 +37,6 @@ User.pre('save', function(next) {
       console.log('old user', this);
       next();
     }
-  });
+});
 
 module.exports = mongoose.model('User', User);
