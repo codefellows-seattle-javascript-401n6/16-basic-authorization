@@ -3,9 +3,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-
-const user = require('./model/user-model');
 const router = require('./routes/routes');
+
 
 app.use(bodyParser.json());
 app.use('/api', router);

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 mongoose.connect('mongodb://localhost/user-login');
 
-const Schema = mongoose.schema;
+const Schema = mongoose.Schema;
 
 const userSchema = Schema({
   username: { type: String, required: true, unique: true},
@@ -16,10 +16,10 @@ userSchema.pre('save', next => {
   let user = this;
 
   if (user.isNew) {
-    bycrypt.genSalt(10, (err, salt) => {
+    bcrypt.genSalt(10, (err, salt) => {
       if (err) return next(err);
 
-      bycrypt.hash(user.password, salt, (err, hash) => {
+      bcrypt.hash(user.password, salt, (err, hash) => {
         if (err) return next(err);
 
         user.password = hash;

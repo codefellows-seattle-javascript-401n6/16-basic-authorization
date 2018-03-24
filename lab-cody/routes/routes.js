@@ -1,8 +1,8 @@
 'use strict';
 
 const express = require('express');
-const User = require('./model/user-model');
-const router = require('./routes/routes');
+const User = require('../model/user');
+const router = express.Router();
 
 router.route('/signup')
   .get((req, res) => {
@@ -18,7 +18,7 @@ router.route('/signup')
       .catch(err => res.sendStatus(400).send(err.message));
   });
 
-rouster.route('/signin').get((req, res) => {
+router.route('/signin').get((req, res) => {
   let authHeader = req.get('Authorization');
   console.log('header:', authHeader);
   if (!authHeader) {
@@ -40,7 +40,8 @@ rouster.route('/signin').get((req, res) => {
       if (user.password === password) {
         res.send('Logged in');
       } else {
-        res.sendStatus(401).send('Invalid Password');
+        res.status(401);
+        res.send('wrong password');
       }
     })
     .catch(err => res.send(err.message));
