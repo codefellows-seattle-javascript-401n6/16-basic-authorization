@@ -1,3 +1,5 @@
+'use strict';
+
 const superagent = require('superagent');
 
 const PORT = process.env.PORT || 3000;
@@ -20,12 +22,12 @@ describe('/api/signup', () => {
     delete params['username'];
 
     superagent.post(SIGNUP_URL)
-    .set('Content-Type', 'application/json')
-    .send(params)
-    .catch(err => {
-      expect(err.status).toEqual(400);
-      done();
-    });
+      .set('Content-Type', 'application/json')
+      .send(params)
+      .catch(err => {
+        expect(err.status).toEqual(400);
+        done();
+      });
   });
 
   it.skip('should return status 400 if missing email', (done) => {
@@ -33,12 +35,12 @@ describe('/api/signup', () => {
     delete params['email'];
 
     superagent.post(SIGNUP_URL)
-    .set('Content-Type', 'application/json')
-    .send(params)
-    .catch(err => {
-      expect(err.status).toEqual(400);
-      done();
-    });
+      .set('Content-Type', 'application/json')
+      .send(params)
+      .catch(err => {
+        expect(err.status).toEqual(400);
+        done();
+      });
   });
 
   it.skip('should return status 400 if missing password', (done) => {
@@ -46,24 +48,24 @@ describe('/api/signup', () => {
     delete params['password'];
 
     superagent.post(SIGNUP_URL)
-    .set('Content-Type', 'application/json')
-    .send(params)
-    .catch(err => {
-      expect(err.status).toEqual(400);
-      done();
-    });
+      .set('Content-Type', 'application/json')
+      .send(params)
+      .catch(err => {
+        expect(err.status).toEqual(400);
+        done();
+      });
   });
 
   it.skip('should return status 200 with successful request', (done) => {
     let params = getUserParams();
 
     superagent.post(SIGNUP_URL)
-    .set('Content-Type', 'application/json')
-    .send(params)
-    .then(res => {
-      expect(res.status).toEqual(200);
-      done();
-    });
+      .set('Content-Type', 'application/json')
+      .send(params)
+      .then(res => {
+        expect(res.status).toEqual(200);
+        done();
+      });
   });
 });
 
@@ -72,22 +74,22 @@ describe('/api/signin', () => {
     let params = getUserParams();
 
     superagent.post(SIGNUP_URL)
-    .set('Content-Type', 'application/json')
-    .send(params)
-    .then(res => {
-      expect(res.status).toEqual(200);
+      .set('Content-Type', 'application/json')
+      .send(params)
+      .then(res => {
+        expect(res.status).toEqual(200);
 
-      // intentionally set the password as a wrong password
-      let payload = params['username'] + ':' + 'wrongpassword';
-      let encoded = btoa(payload);
+        // intentionally set the password as a wrong password
+        let payload = params['username'] + ':' + 'wrongpassword';
+        let encoded = btoa(payload);
 
-      return superagent.get(SIGNIN_URL)
-      .set('Authorization', 'Basic ' + encoded);
-    })
-    .catch(err => {
-      expect(err.status).toEqual(401);
-      done();
-    });
+        return superagent.get(SIGNIN_URL)
+          .set('Authorization', 'Basic ' + encoded);
+      })
+      .catch(err => {
+        expect(err.status).toEqual(401);
+        done();
+      });
   });
 
 
@@ -95,20 +97,20 @@ describe('/api/signin', () => {
     let params = getUserParams();
 
     superagent.post(SIGNUP_URL)
-    .set('Content-Type', 'application/json')
-    .send(params)
-    .then(res => {
-      expect(res.status).toEqual(200);
+      .set('Content-Type', 'application/json')
+      .send(params)
+      .then(res => {
+        expect(res.status).toEqual(200);
 
-      let payload = params['username'] + ':' + params['password'];
-      let encoded = btoa(payload);
+        let payload = params['username'] + ':' + params['password'];
+        let encoded = btoa(payload);
 
-      return superagent.get(SIGNIN_URL)
-      .set('Authorization', 'Basic ' + encoded);
-    })
-    .then(res => {
-      expect(res.status).toEqual(200);
-      done();
-    });
+        return superagent.get(SIGNIN_URL)
+          .set('Authorization', 'Basic ' + encoded);
+      })
+      .then(res => {
+        expect(res.status).toEqual(200);
+        done();
+      });
   });
 });

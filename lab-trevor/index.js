@@ -18,5 +18,5 @@ app.use(bodyParser);
 app.use('/api', route);
 
 app.listen(PORT, () => {
-    console.log('listening on port: ' + PORT);
+  console.log('listening on port: ' + PORT);
 });
