@@ -21,12 +21,12 @@ const User = new mongoose.Schema({
     }
 });
 
-User.methods.comparePass = function(password) {
+User.methods.comparePassword = function(password) {
     bcrypt.compare(password, this.password, function(err, res) {
-        if(password === this.password){
-            res.status(200)
+        if(err){
+            res.sendStatus(401)
         } else{
-            err.status(401);
+            res.sendStatus(200);
         }
     })
 }

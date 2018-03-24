@@ -11,24 +11,25 @@ router.get('/', (req, res) => {
         res.send(results);
     });
 })
+
 router.get('/signin', (req, res) => {
     let authHeader = req.get('AUTHORIZATION');
     if (!authHeader) {
         res.sendStatus(401);
         res.send('NEED USERNAME/PASSWORD');
         return;
-    } 
+    }
 
   let payload = authHeader.split('Basic ')[1];
   let decoded = Buffer.from(payload, 'base64').toString();
   let [username, password] = decoded.split(':');
   console.log('credentials:', username, password);
-  res.send('SECRET RECIPE');
+  res.send('IT WORKS!');
 });
 
 //POST REQUEST
 router.post('/signup', (req, res) => {
-    console.log('req', req.body)
+    console.log('req.body:', req.body)
     User.create(req.body)
     .then(() => { res.sendStatus(200)
     })
