@@ -15,7 +15,7 @@ function getUserParams() {
 };
 
 describe('/api/signup', () => {
-  it('should return status 400 if missing username', (done) => {
+  it.skip('should return status 400 if missing username', (done) => {
     let params = getUserParams();
     delete params['username'];
 
@@ -54,7 +54,7 @@ describe('/api/signup', () => {
     });
   });
 
-  it.skip('should return status 200 with successful request', (done) => {
+  it('should return status 200 with successful request', (done) => {
     let params = getUserParams();
 
     superagent.post(SIGNUP_URL)
@@ -91,7 +91,7 @@ describe('/api/signin', () => {
   });
 
 
-  it.skip('should return 200 if username and password are', (done) => {
+  it('should return 200 if username and password are', (done) => {
     let params = getUserParams();
 
     superagent.post(SIGNUP_URL)
