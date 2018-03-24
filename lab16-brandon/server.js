@@ -6,8 +6,6 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// dotenv.load();
-
 const authRouter = require('./route/auth-router.js');
 mongoose.connect('mongodb://localhost/16-basic-auth');
 
