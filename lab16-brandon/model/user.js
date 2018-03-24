@@ -9,15 +9,20 @@ const User = new mongoose.Schema({
   password: { type: String, required: true }
 });
 
+User.methods.checkPassword = function(attempt) {
+  return bcrypt.compare(attempt, this.password);
+ }
+ 
 User.pre('save', function(next) {
   if (this.isNew) {
-    bcrypt.hash(this.password, 10, (err, hash) => {
-      this.password = hash
-      this.passwordHash = hash
-    console.log('New user', this);
-  // } else {
-  //   console.log('old user', this);
-  next();
+    bcrypt.hash(this.password, 10).then(hash => {
+      this.password = hash;
+      next();
+    }).catch(err => console.error(err));
+  } else {
+    next();
+  };
 });
+ 
 
 module.exports = mongoose.model('User', User);

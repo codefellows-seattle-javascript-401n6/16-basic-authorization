@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^1.0.3",
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
@@ -23,6 +24,7 @@
     "mongoose": "^5.0.11"
   },
   "devDependencies": {
+    "eslint-config-google": "^0.9.1",
     "jest": "^22.4.2",
     "superagent": "^3.8.2"
   }
