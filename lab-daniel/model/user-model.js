@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/user');
 const bcrypt = require('bcrypt');
 
+
 const User = new mongoose.Schema({
     username: {
         type: String,
@@ -20,20 +21,25 @@ const User = new mongoose.Schema({
     }
 });
 
-User.methods.checkPassword = function(rawPassword){
-    return bcrypt.compare(rawPassword, this.password);
+User.methods.comparePass = function(password) {
+    bcrypt.compare(password, this.password, function(err, res) {
+        if(password === this.password){
+            res.status(200)
+        } else{
+            err.status(401);
+        }
+    })
 }
 
 User.pre('save', function(next) {
     if (this.isNew) {
       console.log('New user', this);
-
-      bcrypt.hash(this.password, 6)
+      bcrypt.hash(this.password, 5)
       .then(hash => {
           this.password = hash;
-          next();
+          next()
       }).catch(err => console.log('error', err));
-    } else {
+    }else {
       console.log('old user', this);
       next();
     }

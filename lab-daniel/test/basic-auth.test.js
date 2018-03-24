@@ -67,8 +67,8 @@ describe('/api/signup', () => {
   });
 });
 
-describe('/api/signin', () => {
-  it.skip('should return 401 unauthorized if password is incorrect', (done) => {
+describe('/signin', () => {
+  it('should return 401 unauthorized if password is incorrect', (done) => {
     let params = getUserParams();
 
     superagent.post(SIGNUP_URL)
