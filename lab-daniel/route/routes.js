@@ -8,7 +8,10 @@ router.get('/signin', (req, res) => {
 });
 
 router.post('/signup', express.json(), (req, res) => {
-    res.send(req.body);
+    User.create(req.body)
+    .then(() => res.sendStatus(200))
+    .catch(() => res.sendStatus(400));
+
 });
 
 module.exports = router;

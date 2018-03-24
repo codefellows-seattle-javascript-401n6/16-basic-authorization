@@ -15,7 +15,7 @@ function getUserParams() {
 };
 
 describe('/api/signup', () => {
-  it.skip('should return status 400 if missing username', (done) => {
+  it('should return status 400 if missing username', (done) => {
     let params = getUserParams();
     delete params['username'];
 
@@ -28,7 +28,7 @@ describe('/api/signup', () => {
     });
   });
 
-  it.skip('should return status 400 if missing email', (done) => {
+  it('should return status 400 if missing email', (done) => {
     let params = getUserParams();
     delete params['email'];
 
@@ -41,7 +41,7 @@ describe('/api/signup', () => {
     });
   });
 
-  it.skip('should return status 400 if missing password', (done) => {
+  it('should return status 400 if missing password', (done) => {
     let params = getUserParams();
     delete params['password'];
 
