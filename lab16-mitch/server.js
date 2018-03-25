@@ -2,19 +2,19 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-//const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const router = require('./route/routes.js');
-
+require('dotenv').config();
 const app = express();
 
-app.use('/api', router);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
+app.use('/api', router);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
-//mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI);
 
 // app.get('/', (req, res) => {
 //     res.send('Welcome! Try to access <a href="/secret">/secret</a> to see a secret recipe!');

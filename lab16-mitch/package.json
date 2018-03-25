@@ -13,5 +13,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "btoa": "^1.1.2",
+    "dotenv": "^5.0.1"
+  }
 }

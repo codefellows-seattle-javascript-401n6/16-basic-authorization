@@ -5,15 +5,14 @@ const bcrypt = require('bcrypt');
 
 const Schema = mongoose.Schema;
 
-mongoose.connect('mongodb://localhost/user');
 
 const userSchema = Schema({
-    name: { type: String, required: true, unique: true },
+    username: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true }
 });
 
-userSchema.pre('save', next => {
+userSchema.pre('save', function(next) {
     let user = this;
 
     if (user.isNew) {
@@ -28,7 +27,6 @@ userSchema.pre('save', next => {
         });
         next();
     }
-    next();
 });
 
 const User = mongoose.model('User', userSchema);
