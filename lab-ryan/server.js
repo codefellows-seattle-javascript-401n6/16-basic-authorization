@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/lab-16-user'); // user represents the database collection
+mongoose.connect('mongodb://localhost/lab-16-user'); 
 
 const userRouter = require('./route/user');
 

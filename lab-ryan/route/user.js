@@ -6,26 +6,15 @@ const getAuth = require('../lib/authorization');
 
 const router = express.Router();
 
-// router.post('/signup', express.json(), (req, res) => {
-
-//     User.create(req.body)
-//         .then(() => res.sendStatus(200))
-//         .catch(() => res.sendStatus(400))
-//     });
-
 router.post('/signup', express.json(), (req, res) => {
     User.create(req.body).then(user => {
         res.sendStatus(200);
     }).catch(err => res.sendStatus(400));
 });
 
-// router.get('/signin', (req, res) => { 
-//     res.send('Hello World!');
-// });
 
 router.get('/signin', (req, res) => {
-    let [username, password] = getAuth(req, res); //see demo lab for notation
-
+    let [username, password] = getAuth(req, res); 
     User.findOne({
         username
     }).then(user => {
