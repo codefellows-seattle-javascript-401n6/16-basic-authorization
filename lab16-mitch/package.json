@@ -1,0 +1,21 @@
+{
+  "name": "lab-mitch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "btoa": "^1.1.2",
+    "dotenv": "^5.0.1"
+  }
+}
