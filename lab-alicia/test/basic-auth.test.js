@@ -8,7 +8,7 @@ const SIGNUP_URL = SERVER_URL + '/api/signup';
 const SIGNIN_URL = SERVER_URL + '/api/signin';
 
 function getUserParams() {
-  // using + Math.rabdom() to avoid duplicate user errors
+  // using + Math.random() to avoid duplicate user errors
   return {
     username: 'bill' + Math.random(),
     email: 'bill@microsoft.com' + Math.random(),
