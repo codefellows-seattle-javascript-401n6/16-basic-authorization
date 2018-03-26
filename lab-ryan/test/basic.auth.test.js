@@ -1,7 +1,5 @@
 'use strict';
 
-// code from Steve for testing headers
-
 const superagent = require('superagent');
 
 const PORT = process.env.PORT || 3000;
@@ -32,7 +30,7 @@ describe('/api/signup', () => {
     });
   });
 
-  it.skip('should return status 400 if missing email', (done) => {
+  it('should return status 400 if missing email', (done) => {
     let params = getUserParams();
     delete params['email'];
 
@@ -45,7 +43,7 @@ describe('/api/signup', () => {
     });
   });
 
-  it.skip('should return status 400 if missing password', (done) => {
+  it('should return status 400 if missing password', (done) => {
     let params = getUserParams();
     delete params['password'];
 
@@ -58,7 +56,7 @@ describe('/api/signup', () => {
     });
   });
 
-  it.skip('should return status 200 with successful request', (done) => {
+  it('should return status 200 with successful request', (done) => {
     let params = getUserParams();
 
     superagent.post(SIGNUP_URL)
@@ -72,7 +70,7 @@ describe('/api/signup', () => {
 });
 
 describe('/api/signin', () => {
-  it.skip('should return 401 unauthorized if password is incorrect', (done) => {
+  it('should return 401 unauthorized if password is incorrect', (done) => {
     let params = getUserParams();
 
     superagent.post(SIGNUP_URL)
@@ -95,7 +93,7 @@ describe('/api/signin', () => {
   });
 
 
-  it.skip('should return 200 if username and password are', (done) => {
+  it('should return 200 if username and password are', (done) => {
     let params = getUserParams();
 
     superagent.post(SIGNUP_URL)

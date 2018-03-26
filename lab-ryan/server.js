@@ -1,16 +1,16 @@
 'use strict';
 
 const express = require('express');
+const PORT = process.env.PORT || 3000;
+
 const app = express();
 
-const bodyParser = require('body-parser');
-app.use(bodyParser.json());
-
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/');
+mongoose.connect('mongodb://localhost/lab-16-user'); // user represents the database collection
+
+const userRouter = require('./route/user');
+
+app.use('/api', userRouter); 
 
 
-let PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log('listening on: http://localhost', PORT);
-});
+app.listen(PORT, () => console.log('listening on: http://localhost', PORT));
